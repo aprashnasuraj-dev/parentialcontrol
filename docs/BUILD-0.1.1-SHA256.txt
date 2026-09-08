@@ -1,0 +1,1 @@
+93a31f857b0ce37c8f0fcc722904b2ae2e4699771186d22901027b3b65924a70  /mnt/data/Charikot-Android-Source/build/offline/Charikot-0.1.1-signed.apk

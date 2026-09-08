@@ -1,0 +1,90 @@
+package com.charikot.parentlock
+
+enum class AppLanguage { ENGLISH, NEPALI }
+
+object T {
+    private fun np(en: String, ne: String): String = if (AppPrefs.language() == AppLanguage.NEPALI) ne else en
+
+    val appName get() = "Charikot"
+    val parentControl get() = np("Parent control", "अभिभावक नियन्त्रण")
+    val welcome get() = np("Protect apps when you hand over your phone", "फोन बच्चालाई दिँदा चाहेको एप सजिलै रोक्नुहोस्")
+    val english get() = "English"
+    val nepali get() = "नेपाली"
+    val createPin get() = np("Create parent PIN", "अभिभावक PIN बनाउनुहोस्")
+    val confirmPin get() = np("Confirm PIN", "PIN फेरि हाल्नुहोस्")
+    val pinHint get() = np("4 or 6 digit PIN", "४ वा ६ अंकको PIN")
+    val continueText get() = np("Continue", "अगाडि बढ्नुहोस्")
+    val pinsMismatch get() = np("PINs do not match", "PIN मिलेन")
+    val invalidPin get() = np("Use a 4 or 6 digit PIN", "४ वा ६ अंकको PIN प्रयोग गर्नुहोस्")
+    val enterParentPin get() = np("Enter parent PIN", "अभिभावक PIN हाल्नुहोस्")
+    val unlock get() = np("Unlock", "खोल्नुहोस्")
+    val wrongPin get() = np("Incorrect PIN", "PIN गलत भयो")
+    val protection get() = np("Protection", "सुरक्षा")
+    val protectionOn get() = np("Protection is ON", "सुरक्षा चालु छ")
+    val protectionOff get() = np("Protection is OFF", "सुरक्षा बन्द छ")
+    val protectionAccessReady get() = np("Protection access is ready", "सुरक्षा access तयार छ")
+    val protectionAccessNeeded get() = np("Two Android permissions are needed", "दुईवटा Android अनुमति आवश्यक छन्")
+    val usageAccessOn get() = np("Usage access enabled", "Usage access चालु छ")
+    val usageAccessOff get() = np("Usage access required", "Usage access आवश्यक छ")
+    val overlayAccessOn get() = np("Appear on top enabled", "माथि देखाउने अनुमति चालु छ")
+    val overlayAccessOff get() = np("Appear on top required", "माथि देखाउने अनुमति आवश्यक छ")
+    val grantUsageAccess get() = np("1. Allow usage access", "१. Usage access दिनुहोस्")
+    val grantOverlayAccess get() = np("2. Allow appear on top", "२. माथि देखाउने अनुमति दिनुहोस्")
+    val protectionReady get() = np("Protection service is ready", "सुरक्षा सेवा तयार छ")
+    val lockedApps get() = np("Locked apps", "रोकिएका एपहरू")
+    val attemptsToday get() = np("Attempts today", "आजका प्रयासहरू")
+    val lockUnlockApps get() = np("Lock / unlock apps", "एप रोक्नुहोस् / खोल्नुहोस्")
+    val lockUnlockSubtitle get() = np("Tap one switch. Changes apply immediately.", "एउटा switch थिच्नुहोस्। तुरुन्त लागू हुन्छ।")
+    val schedule get() = np("Schedule", "समय तालिका")
+    val reports get() = np("Reports", "रिपोर्ट")
+    val settings get() = np("Settings", "सेटिङ")
+    val parentArea get() = np("Parent area", "अभिभावक क्षेत्र")
+    val searchApps get() = np("Search installed apps", "इन्स्टल भएका एप खोज्नुहोस्")
+    val locked get() = np("Locked", "रोकिएको")
+    val allowed get() = np("Allowed", "खुला")
+    val noApps get() = np("No launcher apps found", "कुनै एप भेटिएन")
+    val back get() = np("Back", "फिर्ता")
+    val alwaysBlock get() = np("Always block selected apps", "छानिएका एप सधैं रोक्नुहोस्")
+    val scheduledBlock get() = np("Block only during selected time", "छानिएको समयमा मात्र रोक्नुहोस्")
+    val startTime get() = np("Start time", "सुरु समय")
+    val endTime get() = np("End time", "अन्त्य समय")
+    val days get() = np("Days", "दिनहरू")
+    val save get() = np("Save", "सुरक्षित गर्नुहोस्")
+    val scheduleSaved get() = np("Schedule saved", "समय तालिका सुरक्षित भयो")
+    val monday get() = np("Mon", "सोम")
+    val tuesday get() = np("Tue", "मंगल")
+    val wednesday get() = np("Wed", "बुध")
+    val thursday get() = np("Thu", "बिही")
+    val friday get() = np("Fri", "शुक्र")
+    val saturday get() = np("Sat", "शनि")
+    val sunday get() = np("Sun", "आइत")
+    val noAttempts get() = np("No blocked attempts yet", "अहिलेसम्म रोकिएको प्रयास छैन")
+    val clearReports get() = np("Clear reports", "रिपोर्ट खाली गर्नुहोस्")
+    val language get() = np("Language", "भाषा")
+    val changePin get() = np("Change parent PIN", "अभिभावक PIN परिवर्तन गर्नुहोस्")
+    val lockParentArea get() = np("Lock parent area now", "अभिभावक क्षेत्र अहिले लक गर्नुहोस्")
+    val about get() = np("About protection", "सुरक्षाबारे")
+    val limitation get() = np(
+        "Charikot blocks selected apps locally using Android Usage Access plus an on-screen blocking layer. It does not use Accessibility. A normal app cannot fully stop uninstall, force-stop, Safe Mode, or someone disabling its special access in Android Settings.",
+        "Charikot ले Android Usage Access र on-screen blocking layer प्रयोग गरेर छानिएका एप स्थानीय रूपमा रोक्छ। यसले Accessibility प्रयोग गर्दैन। सामान्य एपले uninstall, force-stop, Safe Mode वा Android Settings बाट special access बन्द गर्न पूर्ण रूपमा रोक्न सक्दैन।"
+    )
+    val blockedNow get() = np("This app is locked", "यो एप अहिले रोकिएको छ")
+    val parentPinRequired get() = np("Parent PIN is required", "अभिभावक PIN आवश्यक छ")
+    val allow5 get() = np("Allow for 5 minutes", "५ मिनेटका लागि खोल्नुहोस्")
+    val allow15 get() = np("Allow for 15 minutes", "१५ मिनेटका लागि खोल्नुहोस्")
+    val unlockPermanent get() = np("Unlock this app", "यो एप सधैंका लागि खोल्नुहोस्")
+    val goHome get() = np("Go Home", "Home मा जानुहोस्")
+    val temporaryAllowed get() = np("Temporarily allowed", "अस्थायी रूपमा खोलियो")
+    val permanentlyAllowed get() = np("App unlocked", "एप खोलियो")
+    val serviceDisclosureTitle get() = np("Protection access", "सुरक्षा access")
+    val serviceDisclosure get() = np(
+        "Charikot needs Usage Access to know which app is in front and Appear on top to place the local PIN lock screen over a selected app. It does not use Accessibility, read messages, passwords, or typed text, and it does not upload activity. Core protection works without internet.",
+        "Charikot लाई कुन एप अगाडि खुला छ भनेर थाहा पाउन Usage Access र छानिएको एपमाथि स्थानीय PIN lock screen देखाउन Appear on top अनुमति चाहिन्छ। यसले Accessibility, सन्देश, password वा टाइप गरेको लेखाइ पढ्दैन र गतिविधि upload गर्दैन। मुख्य सुरक्षा internet बिना काम गर्छ।"
+    )
+    val ok get() = np("OK", "ठीक छ")
+    val cancel get() = np("Cancel", "रद्द गर्नुहोस्")
+    val newPin get() = np("New PIN", "नयाँ PIN")
+    val pinChanged get() = np("PIN changed", "PIN परिवर्तन भयो")
+    val enabled get() = np("Enabled", "चालु")
+    val disabled get() = np("Disabled", "बन्द")
+}

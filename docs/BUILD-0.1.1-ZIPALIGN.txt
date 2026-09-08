@@ -1,0 +1,11 @@
+Verifying alignment of /mnt/data/Charikot-Android-Source/build/offline/Charikot-0.1.1-signed.apk (4)...
+      49 AndroidManifest.xml (OK - compressed)
+    1586 res/drawable/ic_charikot.xml (OK - compressed)
+    2112 res/xml/backup_rules.xml (OK - compressed)
+    2339 res/xml/data_extraction_rules.xml (OK - compressed)
+    2660 resources.arsc (OK)
+    3996 classes.dex (OK)
+ 2361746 META-INF/CHARIKOT.SF (OK - compressed)
+ 2362254 META-INF/CHARIKOT.RSA (OK - compressed)
+ 2364211 META-INF/MANIFEST.MF (OK - compressed)
+Verification succesful

@@ -1,0 +1,16 @@
+CHARIKOT - SAMSUNG GALAXY A51 INSTALL / FIRST USE
+
+1. Copy Charikot-0.1.0-signed.apk to the Galaxy A51.
+2. Tap the APK. If Samsung asks, allow "Install unknown apps" for the app you used to open the APK (My Files/Chrome/etc.).
+3. Install and open Charikot.
+4. Choose English or नेपाली.
+5. Create a 4- or 6-digit parent PIN.
+6. On the dashboard, tap "Enable protection service" / "सुरक्षा सेवा चालु गर्नुहोस्".
+7. In Samsung Accessibility settings, open Installed apps / Installed services, select "Charikot Protection", and turn it ON. Confirm the Android warning only if you agree with the disclosure shown in Charikot.
+8. Return to Charikot and enter the parent PIN again.
+9. Tap "Lock / unlock apps" / "एप रोक्नुहोस् / खोल्नुहोस्".
+10. Turn a switch ON to lock an app. Turn it OFF to unlock it. Changes apply immediately; there is no Save button.
+11. When a blocked app opens, Charikot shows the lock screen. Parent PIN can allow it for 5 minutes, 15 minutes, or unlock it permanently.
+
+Important Android limitation:
+A normal third-party app cannot completely prevent uninstall, force-stop, Safe Mode, or a user manually disabling Accessibility in Android Settings.

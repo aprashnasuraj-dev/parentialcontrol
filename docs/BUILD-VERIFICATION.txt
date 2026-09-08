@@ -1,0 +1,34 @@
+CHARIKOT 0.1.0 - BUILD VERIFICATION
+
+App name: Charikot
+Package: com.charikot.parentlock
+Version: 0.1.0 (versionCode 1)
+Min SDK: 26 (Android 8.0)
+Target / compile SDK: 36
+APK type: Universal Java/Kotlin bytecode; no native ABI libraries
+Intended device: Samsung Galaxy A51 (compatible with minSdk 26+)
+
+Signature verification:
+- APK Signature Scheme v2: PASS
+- APK Signature Scheme v3: PASS
+- Signer certificate SHA-256: 4262c0bd61412e422f336387b5c53c3171674d1a6949f56a974ceda67ae6e10f
+
+ZIP alignment:
+- 4-byte alignment: PASS
+- 16K page alignment check mode: PASS
+
+Requested Android permission:
+- android.permission.RECEIVE_BOOT_COMPLETED
+
+Special user-enabled capability:
+- AccessibilityService (Charikot Protection), enabled manually by the parent in Android Settings.
+- No SYSTEM_ALERT_WINDOW permission is used. Blocking UI uses TYPE_ACCESSIBILITY_OVERLAY from the enabled AccessibilityService.
+
+Final APK SHA-256:
+013c74e2de4be61121ebfe870c7dcdf586ec0d6ff6216c18a48d47e667d9ec46
+
+Final APK size:
+2,368,224 bytes
+
+Runtime-device test note:
+No physical Android device is attached to the build environment, so installation was not executed here. Static APK packaging, manifest, dex, alignment, and signature verification all passed.

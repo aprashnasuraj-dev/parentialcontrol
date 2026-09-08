@@ -1,0 +1,30 @@
+Charikot 0.1.1 - Play Protect compatibility redesign
+
+Reason for change:
+The previous sideload build declared Android AccessibilityService. Google Play Protect can block installation of unverified apps that request sensitive permissions/access commonly abused in fraud.
+
+What changed:
+- AccessibilityService removed completely.
+- BIND_ACCESSIBILITY_SERVICE removed completely.
+- No Accessibility configuration remains in the APK.
+- Foreground app detection now uses Android Usage Access (PACKAGE_USAGE_STATS special access).
+- Blocking UI now uses Android "Appear on top" (SYSTEM_ALERT_WINDOW special access).
+- Foreground protection service keeps local blocking active and shows a persistent system notification.
+- Same package name: com.charikot.parentlock
+- Same signing certificate as 0.1.0.
+- Version code 2 / version 0.1.1.
+
+Parent setup on Samsung Galaxy A51:
+1. Install Charikot 0.1.1.
+2. Open Charikot and create/enter parent PIN.
+3. Tap "1. Allow usage access" and enable Charikot.
+4. Return to Charikot.
+5. Tap "2. Allow appear on top" and enable Charikot.
+6. Return to Charikot. Protection starts automatically.
+7. Open "Lock / unlock apps" and switch apps ON/OFF.
+
+Security/privacy:
+Charikot does not use Accessibility, does not read messages/passwords/typed text, and core blocking is local-only.
+
+Known platform limitation:
+Play Protect also uses server-side reputation and device security settings. No locally signed APK can guarantee that every Android device will accept sideload installation. If the device uses Android Advanced Protection, unknown-source apps may be blocked regardless of manifest permissions.

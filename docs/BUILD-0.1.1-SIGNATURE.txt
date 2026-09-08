@@ -1,0 +1,17 @@
+Verifies
+Verified using v1 scheme (JAR signing): false
+Verified using v2 scheme (APK Signature Scheme v2): true
+Verified using v3 scheme (APK Signature Scheme v3): true
+Verified using v3.1 scheme (APK Signature Scheme v3.1): false
+Verified using v4 scheme (APK Signature Scheme v4): false
+Verified for SourceStamp: false
+Number of signers: 1
+Signer #1 certificate DN: CN=Charikot Android, OU=Parent Control, O=Charikot, L=Charikot, ST=Bagmati, C=NP
+Signer #1 certificate SHA-256 digest: 4262c0bd61412e422f336387b5c53c3171674d1a6949f56a974ceda67ae6e10f
+Signer #1 certificate SHA-1 digest: 4b248fb7959d1d58e6e8d74485403fdfa50c1813
+Signer #1 certificate MD5 digest: 6875b1e07ad969f11e562d445d5847bb
+Signer #1 key algorithm: RSA
+Signer #1 key size (bits): 4096
+Signer #1 public key SHA-256 digest: 364e93e554e0144b1de808f9999745a035f2b59dbf9cbd07986831f88bfb360c
+Signer #1 public key SHA-1 digest: 8a0b1ea1e28c5195fb6455047e21c67d357b4e7a
+Signer #1 public key MD5 digest: 5795ed3518c60b1a2ac60fdb6c578c84
