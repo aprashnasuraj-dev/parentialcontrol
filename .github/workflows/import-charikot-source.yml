@@ -32,7 +32,7 @@ jobs:
           SHARE_URL: https://firestorage.ai/ja/f/ycExinYpPuxr
           FILE_NAME: Charikot-OpenSource-v0.1.1.zip
         run: |
-          cat > /tmp/download-source.mjs <<'EOF'
+          cat > download-source.mjs <<'EOF'
           import { chromium } from 'playwright';
           import fs from 'fs';
 
@@ -92,7 +92,7 @@ jobs:
           await browser.close();
           if (!done || !fs.existsSync('/tmp/source.zip')) throw new Error('Source bundle download failed');
           EOF
-          node /tmp/download-source.mjs
+          node download-source.mjs
           echo '1ea6c440d095a08af227630f01bd30d527e76ef900e60079e0e7e267c016473a  /tmp/source.zip' | sha256sum -c -
 
       - name: Import source tree
