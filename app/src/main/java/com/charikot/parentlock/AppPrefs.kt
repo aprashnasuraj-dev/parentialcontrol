@@ -39,7 +39,6 @@ object AppPrefs {
         val next = blockedApps().toMutableSet()
         if (blocked) next.add(pkg) else next.remove(pkg)
         prefs.edit().putStringSet("blocked_apps", next).apply()
-        if (!blocked) clearTemporaryUnlock(pkg)
     }
 
     fun scheduleAlways(): Boolean = prefs.getBoolean("schedule_always", true)
@@ -50,18 +49,6 @@ object AppPrefs {
     fun saveSchedule(always: Boolean, start: Int, end: Int, mask: Int) {
         prefs.edit().putBoolean("schedule_always", always).putInt("schedule_start", start)
             .putInt("schedule_end", end).putInt("schedule_days", mask).apply()
-    }
-
-    fun setTemporaryUnlock(pkg: String, untilMs: Long) = prefs.edit().putLong("temp_$pkg", untilMs).apply()
-    fun temporaryUnlockUntil(pkg: String): Long = prefs.getLong("temp_$pkg", 0L)
-    fun clearTemporaryUnlock(pkg: String) = prefs.edit().remove("temp_$pkg").apply()
-    fun isTemporarilyAllowed(pkg: String, now: Long = System.currentTimeMillis()): Boolean {
-        val until = temporaryUnlockUntil(pkg)
-        if (until <= now) {
-            if (until != 0L) clearTemporaryUnlock(pkg)
-            return false
-        }
-        return true
     }
 
     fun recordAttempt(pkg: String, label: String, now: Long = System.currentTimeMillis()) {

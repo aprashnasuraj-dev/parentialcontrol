@@ -1,0 +1,18 @@
+Charikot v0.1.2 verification
+
+Package: com.charikot.parentlock
+Version code: 3
+Version name: 0.1.2
+Min SDK: 26
+Target/compile SDK: 36
+APK size: 2,380,505 bytes
+SHA-256: d1bf1ba7be48a4965abe3741614c5508ce1373df1c808e3be78d3d7d2675e835
+Signing certificate SHA-256: 4262c0bd61412e422f336387b5c53c3171674d1a6949f56a974ceda67ae6e10f
+APK Signature Scheme v2: PASS
+APK Signature Scheme v3: PASS
+ZIP alignment: PASS
+AccessibilityService: not used
+Temporary app unlock/bypass: removed
+Blocking-screen permanent unlock: removed
+Parent management: PIN-protected Charikot app only
+Self protection: Device Admin support; full uninstall block when provisioned as Device Owner

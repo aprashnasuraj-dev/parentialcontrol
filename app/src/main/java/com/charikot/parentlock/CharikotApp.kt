@@ -6,5 +6,6 @@ class CharikotApp : Application() {
     override fun onCreate() {
         super.onCreate()
         AppPrefs.init(this)
+        SelfProtection.enforceUninstallBlock(this)
     }
 }

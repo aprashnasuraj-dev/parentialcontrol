@@ -17,16 +17,13 @@ import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
-import android.text.InputType
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Button
-import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Space
 import android.widget.TextView
-import android.widget.Toast
 
 class ProtectionService : Service() {
     companion object {
@@ -41,7 +38,6 @@ class ProtectionService : Service() {
     private var foregroundPackage: String? = null
     private var overlay: View? = null
     private var overlayPackage: String? = null
-    private var reblockRunnable: Runnable? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -158,7 +154,7 @@ class ProtectionService : Service() {
 
     private fun evaluate() {
         val pkg = foregroundPackage ?: return
-        if (pkg == packageName || !AppPrefs.isBlocked(pkg) || !ScheduleChecker.shouldBlock() || AppPrefs.isTemporarilyAllowed(pkg)) {
+        if (pkg == packageName || !AppPrefs.isBlocked(pkg) || !ScheduleChecker.shouldBlock()) {
             hideOverlay()
             return
         }
@@ -209,45 +205,23 @@ class ProtectionService : Service() {
         }, matchWrap())
 
         root.addView(TextView(this).apply {
-            text = T.parentPinRequired
+            text = T.unlockFromCharikotOnly
             textSize = 16f
             setTextColor(Color.DKGRAY)
             gravity = Gravity.CENTER
+            setPadding(0, 0, 0, dp(14))
         }, matchWrap())
 
-        val pin = EditText(this).apply {
-            hint = T.pinHint
-            inputType = InputType.TYPE_CLASS_NUMBER or InputType.TYPE_NUMBER_VARIATION_PASSWORD
-            gravity = Gravity.CENTER
-            textSize = 22f
-            maxLines = 1
-            setPadding(dp(12), dp(12), dp(12), dp(12))
-        }
-        root.addView(pin, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(58)).apply {
-            topMargin = dp(12)
-            bottomMargin = dp(12)
-        })
-
-        fun pinButton(labelText: String, action: () -> Unit): Button = Button(this).apply {
-            text = labelText
-            textSize = 16f
+        root.addView(Button(this).apply {
+            text = T.openCharikot
             isAllCaps = false
+            textSize = 16f
             setOnClickListener {
-                if (!PinManager.verify(pin.text.toString())) {
-                    pin.text?.clear()
-                    pin.error = T.wrongPin
-                    return@setOnClickListener
-                }
-                action()
+                hideOverlay()
+                val parent = Intent(this@ProtectionService, MainActivity::class.java)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(parent)
             }
-        }
-
-        root.addView(pinButton(T.allow5) { temporarilyAllow(pkg, 5) }, buttonLp())
-        root.addView(pinButton(T.allow15) { temporarilyAllow(pkg, 15) }, buttonLp())
-        root.addView(pinButton(T.unlockPermanent) {
-            AppPrefs.setBlocked(pkg, false)
-            Toast.makeText(this, T.permanentlyAllowed, Toast.LENGTH_SHORT).show()
-            hideOverlay()
         }, buttonLp())
 
         root.addView(Space(this), LinearLayout.LayoutParams(1, 0, 1f))
@@ -280,21 +254,6 @@ class ProtectionService : Service() {
             overlay = null
             overlayPackage = null
         }
-    }
-
-    private fun temporarilyAllow(pkg: String, minutes: Int) {
-        val until = System.currentTimeMillis() + minutes * 60_000L
-        AppPrefs.setTemporaryUnlock(pkg, until)
-        Toast.makeText(this, T.temporaryAllowed, Toast.LENGTH_SHORT).show()
-        hideOverlay()
-        reblockRunnable?.let(handler::removeCallbacks)
-        val runnable = Runnable {
-            if (foregroundPackage == pkg && AppPrefs.protectionEnabled() && AppPrefs.isBlocked(pkg) && ScheduleChecker.shouldBlock() && !AppPrefs.isTemporarilyAllowed(pkg)) {
-                showOverlay(pkg)
-            }
-        }
-        reblockRunnable = runnable
-        handler.postDelayed(runnable, minutes * 60_000L + 300L)
     }
 
     private fun hideOverlay() {

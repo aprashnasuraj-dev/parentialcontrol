@@ -65,17 +65,38 @@ object T {
     val lockParentArea get() = np("Lock parent area now", "अभिभावक क्षेत्र अहिले लक गर्नुहोस्")
     val about get() = np("About protection", "सुरक्षाबारे")
     val limitation get() = np(
-        "Charikot blocks selected apps locally using Android Usage Access plus an on-screen blocking layer. It does not use Accessibility. A normal app cannot fully stop uninstall, force-stop, Safe Mode, or someone disabling its special access in Android Settings.",
-        "Charikot ले Android Usage Access र on-screen blocking layer प्रयोग गरेर छानिएका एप स्थानीय रूपमा रोक्छ। यसले Accessibility प्रयोग गर्दैन। सामान्य एपले uninstall, force-stop, Safe Mode वा Android Settings बाट special access बन्द गर्न पूर्ण रूपमा रोक्न सक्दैन।"
+        "Charikot blocks selected apps locally using Android Usage Access plus an on-screen blocking layer. It does not use Accessibility. Device Admin adds uninstall resistance; full uninstall blocking is enforced only when Charikot is provisioned as Device Owner. Android still controls force-stop, Safe Mode and special-access settings.",
+        "Charikot ले Android Usage Access र on-screen blocking layer प्रयोग गरेर छानिएका एप स्थानीय रूपमा रोक्छ। यसले Accessibility प्रयोग गर्दैन। Device Admin ले uninstall प्रतिरोध बढाउँछ; पूर्ण uninstall रोकावट Charikot लाई Device Owner बनाउँदा मात्र लागू हुन्छ। Force-stop, Safe Mode र special-access settings Android को नियन्त्रणमा रहन्छन्।"
     )
     val blockedNow get() = np("This app is locked", "यो एप अहिले रोकिएको छ")
-    val parentPinRequired get() = np("Parent PIN is required", "अभिभावक PIN आवश्यक छ")
-    val allow5 get() = np("Allow for 5 minutes", "५ मिनेटका लागि खोल्नुहोस्")
-    val allow15 get() = np("Allow for 15 minutes", "१५ मिनेटका लागि खोल्नुहोस्")
-    val unlockPermanent get() = np("Unlock this app", "यो एप सधैंका लागि खोल्नुहोस्")
+    val unlockFromCharikotOnly get() = np(
+        "Only a parent can unlock this app from Charikot. Open Charikot, enter the parent PIN, then turn this app OFF in Lock / unlock apps.",
+        "यो एप Charikot बाट अभिभावकले मात्र खोल्न सक्छ। Charikot खोल्नुहोस्, अभिभावक PIN हाल्नुहोस् र एप रोक्नुहोस् / खोल्नुहोस् सूचीमा यो एप OFF गर्नुहोस्।"
+    )
+    val openCharikot get() = np("Open Charikot", "Charikot खोल्नुहोस्")
+    val selfProtection get() = np("Charikot uninstall protection", "Charikot uninstall सुरक्षा")
+    val enableDeviceAdmin get() = np("Enable anti-uninstall protection", "Uninstall सुरक्षा चालु गर्नुहोस्")
+    val deviceAdminEnabled get() = np("Anti-uninstall protection enabled", "Uninstall सुरक्षा चालु भयो")
+    val deviceAdminOff get() = np("Anti-uninstall protection is OFF", "Uninstall सुरक्षा बन्द छ")
+    val deviceAdminOn get() = np("Device Admin protection is ON", "Device Admin सुरक्षा चालु छ")
+    val deviceOwnerOn get() = np("Full Device Owner uninstall block is ON", "पूर्ण Device Owner uninstall रोकावट चालु छ")
+    val deviceAdminExplanation get() = np(
+        "Enable Device Admin so uninstalling Charikot requires an additional deactivation step. This protects a shared family phone from casual removal.",
+        "Device Admin चालु गर्दा Charikot uninstall गर्नुअघि अतिरिक्त deactivate चरण आवश्यक हुन्छ। यसले साझा पारिवारिक फोनमा सजिलै हटाउनबाट सुरक्षा बढाउँछ।"
+    )
+    val deviceAdminDisableWarning get() = np(
+        "Disabling Charikot device administration reduces parental protection and can allow the app to be uninstalled.",
+        "Charikot Device Admin बन्द गर्दा अभिभावक सुरक्षा कमजोर हुन्छ र एप uninstall गर्न सकिने हुन सक्छ।"
+    )
+    val deviceAdminBasicNote get() = np(
+        "Device Admin adds uninstall resistance, but Android still lets the device owner deactivate it. For a truly blocked uninstall option, provision Charikot as Device Owner on a dedicated child device.",
+        "Device Admin ले uninstall गर्न गाह्रो बनाउँछ, तर Android ले फोन मालिकलाई यसलाई deactivate गर्न दिन्छ। Uninstall विकल्प पूर्ण रूपमा रोक्न छुट्टै child device मा Charikot लाई Device Owner का रूपमा provision गर्नुहोस्।"
+    )
+    val deviceOwnerNote get() = np(
+        "Charikot is Device Owner. Android uninstall blocking is enforced for this package.",
+        "Charikot Device Owner हो। Android ले यस package को uninstall रोकावट लागू गरेको छ।"
+    )
     val goHome get() = np("Go Home", "Home मा जानुहोस्")
-    val temporaryAllowed get() = np("Temporarily allowed", "अस्थायी रूपमा खोलियो")
-    val permanentlyAllowed get() = np("App unlocked", "एप खोलियो")
     val serviceDisclosureTitle get() = np("Protection access", "सुरक्षा access")
     val serviceDisclosure get() = np(
         "Charikot needs Usage Access to know which app is in front and Appear on top to place the local PIN lock screen over a selected app. It does not use Accessibility, read messages, passwords, or typed text, and it does not upload activity. Core protection works without internet.",

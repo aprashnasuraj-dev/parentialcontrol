@@ -30,8 +30,8 @@ mkdir -p "$OUT/classes" "$OUT/dex"
   --manifest "$ROOT/app/src/main/AndroidManifest.xml" \
   --min-sdk-version 26 \
   --target-sdk-version 36 \
-  --version-code 2 \
-  --version-name 0.1.1 \
+  --version-code 3 \
+  --version-name 0.1.2 \
   --auto-add-overlay \
   "$OUT/compiled-res.zip"
 
@@ -51,7 +51,7 @@ cp "$OUT/Charikot-base-unsigned.apk" "$OUT/Charikot-with-dex-unsigned.apk"
 (cd "$OUT/dex" && zip -q -0 "$OUT/Charikot-with-dex-unsigned.apk" classes.dex)
 "$BT/zipalign" -f -P 16 4 \
   "$OUT/Charikot-with-dex-unsigned.apk" \
-  "$OUT/Charikot-0.1.1-unsigned-aligned.apk"
+  "$OUT/Charikot-0.1.2-unsigned-aligned.apk"
 
 if [[ -n "${CHARIKOT_KEYSTORE:-}" ]]; then
   : "${CHARIKOT_KEY_ALIAS:?Set CHARIKOT_KEY_ALIAS}"
@@ -64,12 +64,12 @@ if [[ -n "${CHARIKOT_KEYSTORE:-}" ]]; then
     --key-pass "pass:$KEY_PASS" \
     --v2-signing-enabled true \
     --v3-signing-enabled true \
-    --out "$OUT/Charikot-0.1.1-signed.apk" \
-    "$OUT/Charikot-0.1.1-unsigned-aligned.apk"
-  "$BT/apksigner" verify --verbose --print-certs "$OUT/Charikot-0.1.1-signed.apk"
-  "$BT/zipalign" -c -P 16 -v 4 "$OUT/Charikot-0.1.1-signed.apk"
-  sha256sum "$OUT/Charikot-0.1.1-signed.apk"
+    --out "$OUT/Charikot-0.1.2-signed.apk" \
+    "$OUT/Charikot-0.1.2-unsigned-aligned.apk"
+  "$BT/apksigner" verify --verbose --print-certs "$OUT/Charikot-0.1.2-signed.apk"
+  "$BT/zipalign" -c -P 16 -v 4 "$OUT/Charikot-0.1.2-signed.apk"
+  sha256sum "$OUT/Charikot-0.1.2-signed.apk"
 else
-  echo "Unsigned APK ready: $OUT/Charikot-0.1.1-unsigned-aligned.apk"
+  echo "Unsigned APK ready: $OUT/Charikot-0.1.2-unsigned-aligned.apk"
   echo "To sign, set CHARIKOT_KEYSTORE, CHARIKOT_KEY_ALIAS and CHARIKOT_KEYSTORE_PASSWORD."
 fi

@@ -34,6 +34,7 @@ class MainActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppPrefs.init(applicationContext)
+        SelfProtection.enforceUninstallBlock(applicationContext)
         window.statusBarColor = Color.rgb(16, 32, 51)
         window.navigationBarColor = Color.rgb(16, 32, 51)
         root = LinearLayout(this).apply {
@@ -46,11 +47,14 @@ class MainActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
+        SelfProtection.enforceUninstallBlock(this)
         ProtectionAccess.startIfReady(this)
         if (AppPrefs.pinConfigured() && screen != Screen.AUTH && !isAuthorized()) {
             showAuth()
         } else if (screen == Screen.DASHBOARD && isAuthorized()) {
             showDashboard()
+        } else if (screen == Screen.SETTINGS && isAuthorized()) {
+            showSettings()
         }
     }
 
@@ -340,12 +344,27 @@ class MainActivity : Activity() {
         if (!isAuthorized()) return showAuth()
         screen = Screen.SETTINGS
         root.removeAllViews()
-        root.addView(header(T.settings, "Charikot 0.1.1", true))
+        root.addView(header(T.settings, "Charikot 0.1.2", true))
         val content = verticalScroll()
         content.addView(sectionTitle(T.language))
         content.addView(languageButtons { showSettings() })
         content.addView(outlineButton(T.changePin) { showChangePinDialog() }, buttonMarginLp())
         content.addView(outlineButton(T.lockParentArea) { authorizedUntil = 0L; showAuth() }, buttonMarginLp())
+
+        content.addView(sectionTitle(T.selfProtection))
+        val deviceOwner = SelfProtection.isDeviceOwner(this)
+        val adminActive = SelfProtection.isAdminActive(this)
+        val protectionTitle = when {
+            deviceOwner -> "✓ ${T.deviceOwnerOn}"
+            adminActive -> "✓ ${T.deviceAdminOn}"
+            else -> "⚠ ${T.deviceAdminOff}"
+        }
+        val protectionNote = if (deviceOwner) T.deviceOwnerNote else T.deviceAdminBasicNote
+        content.addView(heroCard(protectionTitle, protectionNote), cardLp())
+        if (!adminActive) {
+            content.addView(primaryButton(T.enableDeviceAdmin) { SelfProtection.requestAdmin(this) }, buttonMarginLp())
+        }
+
         content.addView(sectionTitle(T.about))
         content.addView(heroCard(T.about, T.limitation), cardLp())
     }

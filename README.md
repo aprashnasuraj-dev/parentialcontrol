@@ -12,7 +12,7 @@ The main goal is simple: when a parent hands their phone to a child, the parent 
 
 - App name: **Charikot**
 - Package: `com.charikot.parentlock`
-- Version: `0.1.1` (`versionCode 2`)
+- Version: `0.1.2` (`versionCode 3`)
 - Minimum Android: API 26 (Android 8.0)
 - Target Android: API 36
 - Architecture: local-only, no server and no account
@@ -25,8 +25,10 @@ The main goal is simple: when a parent hands their phone to a child, the parent 
 - English / Nepali language mode
 - Always-block or scheduled blocking
 - Day-of-week and start/end-time schedule
-- 5-minute and 15-minute temporary unlock
-- Permanent unlock from the blocking screen after parent PIN verification
+- No temporary bypass from the blocking screen
+- Locked apps can only be unlocked from the PIN-protected Charikot parent area
+- Optional Device Admin anti-uninstall protection
+- Full uninstall blocking when provisioned as Android Device Owner
 - Local blocked-attempt history
 - Protection restarts after device boot
 - No AccessibilityService
@@ -114,3 +116,12 @@ Issues and pull requests are welcome. Please keep the central UX principle intac
 ## License
 
 Apache License 2.0. See [LICENSE](LICENSE).
+
+## Uninstall protection
+
+Charikot v0.1.2 adds layered self-protection:
+
+- **Standard shared-phone mode:** the parent can activate Android Device Admin. This adds an explicit deactivation step before uninstall on supported Android builds, reducing casual removal by a child.
+- **Device Owner mode:** on a dedicated child device, Charikot can use Android `DevicePolicyManager.setUninstallBlocked()` to enforce a true uninstall block for its own package. Device Owner provisioning is an Android system setup step and normally requires a freshly provisioned device.
+
+Android does not let an ordinary third-party app silently make itself permanently non-uninstallable. This project does not attempt to bypass that OS security boundary.
